@@ -22,4 +22,3 @@ r = {
 }
 
 print(main(r))
-# 1249873091:AAEvsC4UX4U9ziYvPOrjw4u6gzl7mrWFnLA
