@@ -3,9 +3,9 @@ class Endpoint:
                   "trace", "patch"]
 
     def __init__(self, request):
-        self.parameters = request["parameters"]
-        self.header = request["header"]
-        self.body = request["body"]
+        self.headers = request.headers
+        self.args = request.args
+        self.body = request.get_json(silent=True)
 
     @classmethod
     def handle(cls, method):

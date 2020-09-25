@@ -8,4 +8,5 @@ class User(Endpoint):
         return f'User -> GET'
 
     def post(self):
+        print(self.body)
         return 'User -> POST'
