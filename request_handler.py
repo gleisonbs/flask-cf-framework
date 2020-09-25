@@ -9,8 +9,9 @@ class RequestHandler:
         self.endpoints[endpoint] = cls
 
     def handle(self, request):
-        endpoint = self.endpoints[request['endpoint']]
-        http_verb = request['method']
+        path = request.path
+        endpoint = self.endpoints[path]
+        http_verb = request.method
 
         http_verb_handler = endpoint.handle(http_verb)
         return http_verb_handler(endpoint(request))
