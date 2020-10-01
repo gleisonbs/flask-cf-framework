@@ -6,6 +6,7 @@ class Endpoint:
         self.headers = request.headers
         self.args = request.args
         self.body = request.get_json(silent=True)
+        self.parameters = {}
 
     @classmethod
     def handle(cls, method):
