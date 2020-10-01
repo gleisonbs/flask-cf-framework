@@ -1,6 +1,3 @@
-import resources.hello
-import resources.user
-
 class RequestHandler:
     def __init__(self):
         self.endpoints = {}
