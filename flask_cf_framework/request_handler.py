@@ -1,8 +1,13 @@
 import re
+from flask_cf_framework import log
+from random import randint
 
+def cors(response, code):
+    return response, code, { "Access-Control-Allow-Origin": "*"}
 
 class RequestHandler:
-    def __init__(self):
+    def __init__(self, debug=True):
+        self.debug = debug
         self.endpoints = {}
 
     def add(self, cls, endpoint):
@@ -42,6 +47,10 @@ class RequestHandler:
         return "", []
 
     def handle(self, request):
+        request_id = str(randint(0, 10000)).zfill(5)
+        if self.debug:
+            log.request(request, request_id)
+
         path = request.path
         route, params = self._match_route(path)
 
@@ -55,4 +64,12 @@ class RequestHandler:
         endpoint_handler = endpoint(request)
         endpoint_handler.parameters = params
 
-        return http_verb_handler(endpoint_handler)
+        if request.method.lower() == "options":
+            return http_verb_handler(endpoint_handler)
+
+        response = cors(*http_verb_handler(endpoint_handler))
+        
+        if self.debug:
+            log.response(response, request_id)
+
+        return response

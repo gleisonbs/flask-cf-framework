@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="flask-cf-framework", # Replace with your own username
-    version="0.0.3",
+    version="0.0.14",
     author="Gleison Batista",
     # author_email="author@example.com",
     description="A route handler for Google Cloud Functions",
